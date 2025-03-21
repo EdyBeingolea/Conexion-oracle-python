@@ -1,0 +1,67 @@
+comandos utilizados :
+
+// instalar maquina virtual
+
+Python -m venv nombre-de-maquina
+
+// librería de Oracle
+
+python -m pip install oracledb --upgrade
+
+// Me permita cargar archivos con .env
+
+pip install python-dotenv
+
+// oracle docker 
+
+///Paso N°1: Descargar y ejecutar imagen Oracle Database
+
+
+docker container run -d --name oracle-docker -p 1521:1521 -e ORACLE_PWD=12345 container-registry.oracle.com/database/express:21.3.0-xe
+
+///Paso N°2: Ingresar al editor SQL del contenedor Oracle Database
+
+
+docker exec -it oracle-docker sqlplus system/12345@localhost:1521/XEPDB1
+
+///Paso N°3: Crear la tabla SYSTEM.CUSTOMER dentro del editor SQL
+
+
+CREATE TABLE SYSTEM.CUSTOMER(
+    id NUMBER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    dni CHAR(8),
+    firstname VARCHAR2(100),
+    lastname VARCHAR2(100),
+    state CHAR(1)
+);
+
+////Paso N°4: Insertar un registro en la tabla SYSTEM.CUSTOMER dentro del editor SQL
+
+
+INSERT INTO  SYSTEM.CUSTOMER (dni, firstname, lastname, state) VALUES ('12345678', 'Juan', 'Perez', 'A');
+
+///Paso N°5: Formatear para un mejor SELECT
+
+
+SET LINESIZE 200;
+SET PAGESIZE 50;
+COLUMN dni FORMAT A10;
+COLUMN firstname FORMAT A20;
+COLUMN lastname FORMAT A20;
+COLUMN state FORMAT A5;
+
+///Paso N°6: Listar la tabla SYSTEM.CUSTOMER dentro del editor SQL
+
+
+SELECT * FROM SYSTEM.CUSTOMER;
+
+///Paso N°7: Salir del editor SQL
+
+
+exit
+
+
+
+
+
+
