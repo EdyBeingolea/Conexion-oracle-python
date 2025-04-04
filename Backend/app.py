@@ -64,7 +64,7 @@ def create_producto():
     try:
         data = request.get_json()
         if not data or 'nombre' not in data or 'precio' not in data:
-            return jsonify({'error': 'Datos incompletos'}), 400
+            return jsonify({'error': 'Datos incompletoss'}), 400
         
         nuevo_producto = Producto(nombre=data['nombre'], precio=data['precio'])
         db.session.add(nuevo_producto)
